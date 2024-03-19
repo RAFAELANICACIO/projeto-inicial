@@ -7,13 +7,13 @@ var saida = document.getElementById("saida-de-dados");
 
 var email = document.getElementById("email");
 
-var telefone = document.getElementById("Telefone");
+var telefone = document.getElementById("telefone");
 
-var cep = document.getElementById("CEP");
+var cep = document.getElementById("cep");
 
 var logradouro = document.getElementById("logradouro");
 
-var número = document.getElementById("número");
+var número = document.getElementById("numero");
 
 var complemento = document.getElementById("complemento");
 
@@ -24,26 +24,41 @@ var cidade = document.getElementById("cidade");
 var estado = document.getElementById("estado");
 
 function alertar(){
-    //alert(nome.value + " " + "clicou no botão!!!");
-    saida.innerText = "Nome: " + " " + nome.value; 
-            "\n  E-mail: " + " " + ElementInternals.value;
 
-            "\n  Telefone: " + " " + ElementInternals.value;
+    //Buscar o endereço pelo cep
 
-            "\n  CEP: " + " " + ElementInternals.value;
+    const url = `https://viacep.com.br/ws/${cep.value}/json`;
+    fetch(url)
+    .then(resposta=>resposta.json())
+    .then(data => {
+        logradouro.value = data.logradouro;
+        bairro.value = data.bairro;
+        cidade.value = data.cidade;
+        estado.value = data.uf;
+
+
+    
+         //alert(nome.value + " " + "clicou no botão!!!");
+         saida.innerText = "Nome: " + " " + nome.value +
+ 
+            "\n  E-mail: " + " " + email.value +
+
+            "\n  Telefone: " + " " + telefone.value +
+
+            "\n  CEP: " + " " + cep.value +
            
-            "\n  Logradouro: " + " " + ElementInternals.value;
+            "\n  Logradouro: " + " " + logradouro.value +
 
-            "\n  Número: " + " " + ElementInternals.value;
+            "\n  Número: " + " " + numero.value +
 
-            "\n  Complemento: " + " " + ElementInternals.value;
+            "\n  Complemento: " + " " + complemento.value +
 
-            "\n  Bairro: " + " " + ElementInternals.value;
+            "\n  Bairro: " + " " + bairro.value +
 
-            "\n  Cidade: " + " " + ElementInternals.value;
+            "\n  Cidade: " + " " + cidade.value +
 
-            "\n  Estado: " + " " + ElementInternals.value;
+            "\n  Estado: " + " " + estado.value;
+
+        })
+        catch(error=>alert(error))
 }
-
-
-
